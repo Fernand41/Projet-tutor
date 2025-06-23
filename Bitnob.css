@@ -1,0 +1,556 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a2a44;
+            color: #fff;
+        }
+        
+        h1,p{
+            font-family: cursive;
+
+        }
+
+        strong{
+            font-size: 20px;
+        }
+
+        p{
+            color: #565d66;
+        }
+
+        .contact{
+            margin-left: 60px;
+        }
+
+        .nav-links{
+            font-family: serif;
+            margin-right: 50px;
+            font-size: 50px;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            background-color: #000000;
+            width: 100%;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        .navbar.scrolled {
+            background-color: #0d1a2e;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+        }
+
+    
+       
+        .logo span {
+            color: #f1c40f;
+             width: 30%;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .contact a:hover {
+            background: #1a1810;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #f1c40f;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links .contact,
+        .nav-links .invest {
+            color: #fff;
+        }
+
+
+
+/* Conteneur principal */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+/* Section texte */
+.text-section {
+    flex: 1;
+    max-width: 600px;
+    padding-right: 40px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    background: linear-gradient(90deg, #ffffff, #f1c40f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h1 span {
+    display: block;
+    font-size: 2.5rem;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Section image */
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bitcoin-image {
+    width: 400px;
+    height:auto;
+    animation: rotate 20s linear infinite;
+    border-radius: 15px;
+    filter: drop-shadow(0 0 30px rgba(241, 196, 15, 0.3));
+    
+}
+
+
+
+/* Responsive - Mobile */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+    
+    .text-section {
+        padding-right: 0;
+        margin-bottom: 40px;
+        text-align: center;
+        order: 1;
+    }
+    
+    .image-section {
+        order: 2;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h1 span {
+        font-size: 1.8rem;
+    }
+    
+    .bitcoin-image {
+        width: 250px;
+        height: 250px;
+    }
+}
+            
+    
+         button {
+            padding: 10px 20px;
+            background-color: #f1c40f;
+            border: none;
+            color: #1a2a44;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+/* Section Liquid Network */
+.liquid-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h1 {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+/* Grille des cartes */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: linear-gradient(145deg, #696666, #444242);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 149, 0, 0.1);
+}
+
+#epargne{
+    width: 80%;
+    margin-left: 50px;
+
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 149, 0, 0.1), transparent);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.card:hover {
+   transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(255, 149, 0, 0.2);
+    border-color: rgba(255, 149, 0, 0.3);
+    
+ 
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+ /* Style pour le logo Wallet of Satoshi */
+        .card-logo {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .card-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            transition: var(--transition);
+            border-radius: 15px;
+        }
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+}
+
+.card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+
+
+.card p {
+    margin-bottom: 20px;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.card .excerpt {
+    margin-bottom: 25px;
+}
+
+/* Bouton Lire */
+.read-more {
+    display: inline-block;
+    color: #f1c40f;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.read-more::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.read-more:hover::after {
+    width: 100%;
+}
+
+.read-more:hover {
+    color: #f1c40f;
+    text-decoration: underline;
+    
+    
+}
+
+p{
+    color: white;
+}
+
+/* Animation des cartes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+       
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+       
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    .section-header h1 {
+        font-size: 2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+        height: 100%;
+    }
+}
+
+
+/* partie FAQs */
+h2 {
+    color: #0c0e10;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-left: 25%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 50%;
+}
+
+.faq-question {
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eed367;
+    color: black;
+}
+
+.faq-question::after {
+    content: "+";
+    font-size: 24px;
+}
+
+.faq-question.active::after {
+    content: "-";
+}
+
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    color: black;
+}
+
+.faq-answer.show {
+    padding: 15px 20px;
+    max-height: 300px;
+}
+ 
+
+/* session  en bas*/
+entête{
+ 
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.flash-section {
+    flex: 2;
+    padding: 20px;
+}
+
+.flash-section h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.flash-icon {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.links {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+}
+
+.column h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.column ul li {
+    margin-bottom: 10px;
+}
+
+.column ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.column ul li a:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+footer {
+   
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline; /* Soulignement au survol pour les liens du footer */
+}
