@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <!-- Définition des métadonnées pour le codage et la responsivité -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion / Inscription</title>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
         /* Réinitialisation des marges, paddings et gestion des boîtes */
         * {
@@ -199,56 +200,32 @@
                 font-size: 12px;
             }
 
-            .btn, .google-btn {
+            .btn,
+            .google-btn {
                 font-size: 14px;
                 padding: 8px;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Conteneur principal pour centrer le formulaire -->
     <div class="container">
-        <!-- Onglets pour basculer entre Connexion et Inscription -->
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('login')">Connexion</button>
-            <button class="tab" onclick="showTab('signup')">Inscription</button>
-        </div>
-
-        <!-- Formulaire de Connexion -->
-        <form id="login-form" class="form active" onsubmit="return validateLogin(event)">
-            <h2>Heureux de vous revoir</h2>
-            <p>Connectez vous pour accéder au plan d'investissement et devises</p>
-            <div class="form-group">
-                <label for="login-email">Adresse E-mail</label>
-                <input type="text" id="login-email" name="login-email" required placeholder="Entrez votre email">
-                <span id="login-email-error" class="error"></span>
-            </div>
-            <div class="form-group">
-                <label for="login-password">Mot de passe</label>
-                <div class="password-container">
-                    <input type="password" id="login-password" name="login-password" required placeholder="Entrez votre mot de passe">
-                    <span class="toggle-password" onclick="togglePassword('login-password')">👁️</span>
-                </div>
-                <span id="login-password-error" class="error"></span>
-            </div>
-            <button type="submit" class="btn">Continuer</button>
-            <button type="button" class="google-btn">G Continuer avec Google</button>
-        </form>
-
-        <!-- Formulaire d'Inscription -->
-        <form id="signup-form" class="form" onsubmit="return validateSignup(event)">
+        <form id="signup-form" class="form active" onsubmit="return validateSignup(event)" action="inscription.php"
+            method="POST">
             <h2>Créer un compte</h2>
             <p>Inscrivez-vous pour commencer votre voyage</p>
             <div class="form-group">
                 <label for="signup-email">Adresse E-mail ou Numéro</label>
-                <input type="text" id="signup-email" name="signup-email" required placeholder="Entrez votre email ou numéro">
+                <input type="text" id="signup-email" name="signup-email" required
+                    placeholder="Entrez votre email ou numéro">
                 <span id="signup-email-error" class="error"></span>
             </div>
             <div class="form-group">
                 <label for="signup-password">Mot de passe</label>
                 <div class="password-container">
-                    <input type="password" id="signup-password" name="signup-password" required placeholder="Entrez votre mot de passe">
+                    <input type="password" id="signup-password" name="signup-password" required
+                        placeholder="Entrez votre mot de passe">
                     <span class="toggle-password" onclick="togglePassword('signup-password')">👁️</span>
                 </div>
                 <span id="signup-password-error" class="error"></span>
@@ -256,69 +233,24 @@
             <div class="form-group">
                 <label for="signup-confirm-password">Confirmer Mot de passe</label>
                 <div class="password-container">
-                    <input type="password" id="signup-confirm-password" name="signup-confirm-password" required placeholder="Confirmez votre mot de passe">
+                    <input type="password" id="signup-confirm-password" name="signup-confirm-password" required
+                        placeholder="Confirmez votre mot de passe">
                     <span class="toggle-password" onclick="togglePassword('signup-confirm-password')">👁️</span>
                 </div>
                 <span id="signup-confirm-error" class="error"></span>
             </div>
             <button type="submit" class="btn">S'inscrire</button>
             <button type="button" class="google-btn">G Continuer avec Google</button>
+            <p>Déjà un compte ? <a href="connexion.html" style="color:#f1c40f;">Se connecter</a></p>
         </form>
     </div>
 
-    <!-- Script pour la gestion des onglets, affichage/masquage du mot de passe et validation -->
     <script>
-        // Fonction pour afficher/masquer le mot de passe
         function togglePassword(fieldId) {
-            const passwordField = document.getElementById(fieldId);
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
         }
 
-        // Fonction pour basculer entre les onglets
-        function showTab(tabId) {
-            const tabs = document.querySelectorAll('.tab');
-            const forms = document.querySelectorAll('.form');
-
-            tabs.forEach(tab => tab.classList.remove('active'));
-            forms.forEach(form => form.classList.remove('active'));
-
-            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
-            document.getElementById(tabId + '-form').classList.add('active');
-        }
-
-        // Validation du formulaire de Connexion
-        function validateLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value.trim();
-
-            document.getElementById('login-email-error').textContent = '';
-            document.getElementById('login-password-error').textContent = '';
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email) {
-                document.getElementById('login-email-error').textContent = 'Veuillez entrer un email.';
-                return false;
-            } else if (!emailRegex.test(email)) {
-                document.getElementById('login-email-error').textContent = 'Veuillez entrer un email valide.';
-                return false;
-            }
-
-            if (!password) {
-                document.getElementById('login-password-error').textContent = 'Veuillez entrer un mot de passe.';
-                return false;
-            } else if (password.length < 6) {
-                document.getElementById('login-password-error').textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
-                return false;
-            }
-
-            alert('Connexion réussie !');
-            document.getElementById('login-form').reset();
-            return true;
-        }
-
-        // Validation du formulaire d'Inscription
         function validateSignup(event) {
             event.preventDefault();
             const emailOrPhone = document.getElementById('signup-email').value.trim();
@@ -338,26 +270,21 @@
                 return false;
             }
 
-            if (!password) {
-                document.getElementById('signup-password-error').textContent = 'Veuillez entrer un mot de passe.';
-                return false;
-            } else if (password.length < 6) {
+            if (password.length < 6) {
                 document.getElementById('signup-password-error').textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
                 return false;
             }
 
-            if (!confirmPassword) {
-                document.getElementById('signup-confirm-error').textContent = 'Veuillez confirmer votre mot de passe.';
-                return false;
-            } else if (password !== confirmPassword) {
+            if (password !== confirmPassword) {
                 document.getElementById('signup-confirm-error').textContent = 'Les mots de passe ne correspondent pas.';
                 return false;
             }
 
             alert('Inscription réussie !');
-            document.getElementById('signup-form').reset();
+            event.target.reset();
             return true;
         }
     </script>
 </body>
+
 </html>

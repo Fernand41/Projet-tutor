@@ -34,3 +34,19 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         navLinks.classList.remove('active');
     });
 });
+
+
+
+
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  const button = document.querySelector('.navbar button');
+
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+    button.style.backgroundColor = '#d4ac0d'; // jaune foncé
+  } else {
+    navbar.classList.remove('scrolled');
+    button.style.backgroundColor = '#f1c40f'; // jaune normal
+  }
+});

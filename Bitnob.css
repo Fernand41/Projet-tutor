@@ -11,8 +11,9 @@ body {
 }
 
 h1, p {
-    font-family: cursive;
+  font-family: cursive;
 }
+
 
 strong {
     font-size: 20px;
@@ -122,6 +123,12 @@ button {
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.convert{
+margin-right: 50px;
+
+
 }
 
 /* Conteneur principal */
@@ -265,7 +272,7 @@ p {
 .card p {
     margin-bottom: 20px;
     opacity: 0.8;
-    font-size: 0.95rem;
+   
 }
 
 .read-more {
@@ -434,10 +441,12 @@ footer a:hover {
         font-size: 20px;
     }
 
-    .hamburger {
-        display: flex;
-        margin-right: 10px;
-    }
+   .hamburger {
+  display: flex; /* à activer en media query */
+  flex-direction: column;
+  cursor: pointer;
+}
+
 
     .nav-links {
         position: fixed;
