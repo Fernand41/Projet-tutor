@@ -6,6 +6,6 @@ session_unset();            // On supprime toutes les variables de session
 session_destroy();          // On détruit complètement la session
 
 // ✅ Redirection vers la page de connexion après déconnexion
-header("Location: connexion.html");
+header("Location: singup.html");
 exit; // On quitte le script
 ?>

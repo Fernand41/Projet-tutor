@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$email, $hashedPassword]);
 
         // Redirige vers une page de succès après inscription
-        header("Location: connexion.html");
+        header("Location: singup.html");
         exit;
 
     } catch (PDOException $e) {
