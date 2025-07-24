@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apprendre le Bitcoin</title>
+  <link rel="stylesheet" href="education.css"/>
+</head>
+<body>
+  <div class="container">
+    <aside class="menu">
+      <h2>Leçons</h2>
+      <ul>
+        <li onclick="loadContent(1)">1. Introduction</li>
+        <li onclick="loadContent(2)">2. Fonctionnement</li>
+        <li onclick="loadContent(3)">3. Obtenir du BTC</li>
+        <li onclick="loadContent(4)">4. Sécurité</li>
+      </ul>
+    </aside>
+
+    <main class="content" id="content">
+      <div id="progress" class="progress-bar">Modules complétés : 0/4</div>
+      <h2>Bienvenue !</h2>
+      <p>Choisis une leçon dans le menu pour commencer à apprendre sur le Bitcoin.</p>
+      <h2>Quelques mots clés que vous aurez à rancontrer lors de votre parcourt dans le cours de ces modules</h2>
+      <p><strong>UTXO : Sigle de Unspent Transaction Output. Un UTXO est une sortie de transaction qui n'a pas encore été dépensée, c'est-à-dire utilisée comme entrée pour une nouvelle transaction. Les UTXOs représentent la fraction de bitcoins que possède un utilisateur et qui sont actuellement disponibles pour être dépensés. Chaque UTXO est associé à un script de sortie spécifique (scriptPubKey), qui définit les conditions nécessaires pour dépenser les bitcoins. Les transactions dans Bitcoin consomment ces UTXOs en entrées (inputs) et créent de nouveaux UTXOs en sorties (outputs). Le modèle d'UTXO est fondamental sur Bitcoin, car il permet de vérifier facilement que les transactions n'essaient pas de dépenser des bitcoins qui n'existent pas ou qui ont déjà été dépensés.</strong></p>
+
+    </main>
+  </div>
+
+  <script src="education.js"></script>
+</body>
+</html>

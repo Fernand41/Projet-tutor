@@ -4,6 +4,7 @@ $host = 'localhost';     // Serveur local (localhost avec XAMPP)
 $user = 'root';          // Nom d'utilisateur par défaut sous XAMPP
 $pass = '';              // Mot de passe vide par défaut
 $dbname = 'bitcoin_education';    // Nom de la base de données à utiliser
+$charset = 'utf8mb4';
 
 try {
     // Création d'une nouvelle connexion PDO (accès sécurisé à MySQL)

@@ -22,14 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Prépare la requête SQL pour insérer le nouvel utilisateur
-    $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO utilisateur (email, password) VALUES (?, ?)");
 
     try {
         // Exécute la requête avec les données fournies
         $stmt->execute([$email, $hashedPassword]);
 
         // Redirige vers une page de succès après inscription
-        header("Location: singup.html");
+        header("Location: signup.html");
         exit;
 
     } catch (PDOException $e) {
