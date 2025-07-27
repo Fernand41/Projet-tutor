@@ -7,27 +7,102 @@
   <link rel="stylesheet" href="education.css"/>
 </head>
 <body>
-  <div class="container">
-    <aside class="menu">
-      <h2>Leçons</h2>
-      <ul>
-        <li onclick="loadContent(1)">1. Introduction</li>
-        <li onclick="loadContent(2)">2. Fonctionnement</li>
-        <li onclick="loadContent(3)">3. Obtenir du BTC</li>
-        <li onclick="loadContent(4)">4. Sécurité</li>
-      </ul>
-    </aside>
+ 
 
-    <main class="content" id="content">
-      <div id="progress" class="progress-bar">Modules complétés : 0/4</div>
-      <h2>Bienvenue !</h2>
-      <p>Choisis une leçon dans le menu pour commencer à apprendre sur le Bitcoin.</p>
-      <h2>Quelques mots clés que vous aurez à rancontrer lors de votre parcourt dans le cours de ces modules</h2>
-      <p><strong>UTXO : Sigle de Unspent Transaction Output. Un UTXO est une sortie de transaction qui n'a pas encore été dépensée, c'est-à-dire utilisée comme entrée pour une nouvelle transaction. Les UTXOs représentent la fraction de bitcoins que possède un utilisateur et qui sont actuellement disponibles pour être dépensés. Chaque UTXO est associé à un script de sortie spécifique (scriptPubKey), qui définit les conditions nécessaires pour dépenser les bitcoins. Les transactions dans Bitcoin consomment ces UTXOs en entrées (inputs) et créent de nouveaux UTXOs en sorties (outputs). Le modèle d'UTXO est fondamental sur Bitcoin, car il permet de vérifier facilement que les transactions n'essaient pas de dépenser des bitcoins qui n'existent pas ou qui ont déjà été dépensés.</strong></p>
+        <div class="education-section">
+            <div class="education-header">
+                <h2 class="education-title">Apprenez Bitcoin étape par étape</h2>
+                <p class="education-subtitle">Maîtrisez les fondamentaux pour utiliser Bitcoin en toute sécurité</p>
+                <button id="toggle-education" class="toggle-btn" onclick="toggleEducation()">📚 Découvrir le programme</button>
+            </div>
 
-    </main>
-  </div>
+            <div id="education-content" class="education-content" style="display: none;">
+                <div class="modules-container">
+                    <div class="module-sidebar">
+                        <h3>Modules de formation</h3>
+                        <div id="progress" class="progress-bar">Modules complétés : 0/4</div>
+                        <div class="module-list">
+                            <button class="module-btn" onclick="loadContent(1)">
+                                <span class="module-icon">📍</span>
+                                <span class="module-title">Général</span>
+                            </button>
+                            <button class="module-btn" onclick="loadContent(2)">
+                                <span class="module-icon">🔐</span>
+                                <span class="module-title">Les aspects techniques du Bitcoin</span>
+                            </button>
+                            <button class="module-btn" onclick="loadContent(3)">
+                                <span class="module-icon">🧠</span>
+                                <span class="module-title">Comment obtenir des Bitcoins</span>
+                            </button>
+                            <button class="module-btn" onclick="loadContent(4)">
+                                <span class="module-icon">🧑‍💻</span>
+                                <span class="module-title">Sécurité</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="module-content">
+                        <div id="content">
+                            <div class="welcome-message">
+                                <h3>Bienvenue dans votre formation Bitcoin !</h3>
+                                <p>Sélectionnez un module dans le menu de gauche pour commencer votre apprentissage.</p>
+                                <div class="welcome-features">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🎯</span>
+                                        <span>Formation progressive</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🔒</span>
+                                        <span>Sécurité renforcée</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">💡</span>
+                                        <span>Conseils pratiques</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-tips-section">
+                    <h3>💡 Conseils avancés de confidentialité</h3>
+                    <div class="privacy-content">
+                        <div class="privacy-card">
+                            <h4>🏠 Utilisez votre propre nœud Bitcoin</h4>
+                            <p>Le principal risque lorsque vous n'utilisez pas votre propre nœud Bitcoin est que l'opérateur du nœud tiers puisse observer vos activités sur la blockchain, voire partager ces informations avec d'autres entités.</p>
+                            <ul class="privacy-tips">
+                                <li><strong>Confidentialité :</strong> Évite que des tiers observent vos activités</li>
+                                <li><strong>Souveraineté :</strong> Vérifiez vous-même la validité des données blockchain</li>
+                                <li><strong>Gouvernance :</strong> Participez activement aux décisions du réseau</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-card">
+                            <h4>🕵️ Tromper les heuristiques d'analyse</h4>
+                            <p>Plus largement, il est important de comprendre les heuristiques d'analyse pour mieux les éviter ou les tromper. Adoptez ces bonnes pratiques :</p>
+                            <ul class="privacy-tips">
+                                <li><strong>Se fondre dans la foule :</strong> Utilisez les standards de script les plus adoptés (P2TR, SegWit V0)</li>
+                                <li><strong>Évitez les montants ronds :</strong> Ne créez pas d'outputs avec des montants "parfaits"</li>
+                                <li><strong>Variez les horaires :</strong> Ne diffusez pas vos transactions aux mêmes heures</li>
+                                <li><strong>Utilisez Tor :</strong> Masquez vos connexions si vous n'avez pas votre propre nœud</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-card">
+                            <h4>⚡ Transactions coinjoin</h4>
+                            <p>Au-delà de toutes ces bonnes pratiques à adopter au quotidien, il existe des méthodes encore plus efficaces pour briser complètement la traçabilité de vos bitcoins. Parmi elles, il y a évidemment les transactions coinjoin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <script src="education.js"></script>
 </body>
 </html>
+
+
+
+

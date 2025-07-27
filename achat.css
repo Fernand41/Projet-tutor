@@ -1,0 +1,396 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #000;
+    line-height: 1.6;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.hero-section, .lightning-section {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;
+    gap: 50px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.bitcoin-image img {
+    width: 200%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+
+.bitcoin-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bitcoin-image img:hover {
+    transform: scale(1.05);
+}
+
+
+.hero-section {
+    background-color: #D9FAFA;
+    border-radius: 0;
+    padding: 60px 20px !important;
+    max-width: 100%;
+    width: 100%;
+}
+
+.main-title {
+    color: #ff6600;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #000;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.lightning-title {
+    color: #ff6600;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.lightning-description {
+    color: #000;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.action-btn:hover {
+    background-color: #e55a00;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 2px solid #ddd;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.close:hover {
+    color: #ff6600;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+.step h3 {
+    color: #ff6600;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #ff6600;
+    outline: none;
+}
+
+.form-group input[readonly] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.btn-primary {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e55a00;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #000;
+    border: 2px solid #ddd;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+
+.deposit-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #ff6600;
+}
+
+.deposit-info p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.deposit-info strong {
+    color: #ff6600;
+}
+
+.success-message {
+    background-color: #e8f5e8;
+    color: #2e7d2e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border: 2px solid #4caf50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section, .lightning-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .lightning-title {
+        font-size: 1.5rem;
+    }
+
+    .buttons-container {
+        justify-content: center;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+}
+
+/* Footer Section */
+entête{
+ 
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.flash-section {
+    flex: 2;
+    padding: 20px;
+}
+
+.flash-section h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.flash-icon {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.links {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+}
+
+.column h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: rgb(0, 0, 0);
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.column ul li {
+    margin-bottom: 10px;
+}
+
+.column ul li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.column ul li a:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+footer {
+   
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: #000000;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline; /* Soulignement au survol pour les liens du footer */
+}
+
+/* Scroll animations */
+body.scrolled .hero-section {
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+body.scrolled .action-btn {
+    background-color: #ff6600;
+    color: #fff;
+}

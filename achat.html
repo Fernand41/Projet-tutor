@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Exchange - Acheter et Vendre Bitcoin</title>
+    <link href="achat.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Page principale -->
+    <div id="main-page" class="page">
+        <div class="hero-section">
+            <div class="text-content">
+                <h1 class="main-title">Découvrez le pouvoir de Bitcoin, à partir de 100 XOF !</h1>
+                <p class="subtitle">Accédez au Bitcoin à partir de 100 Francs CFA pour simplifier vos achats de services et forfaits mobiles. Explorez un nouveau monde de possibilités financières !</p>
+            </div>
+            <div class="bitcoin-image">
+                <img src="Bitcoin-info.d4aa6a58.svg" alt="Bitcoin" />
+            </div>
+        </div>
+
+        <div class="lightning-section">
+            <div class="text-content">
+                <h2 class="lightning-title">Échangez vos Bitcoins en toute simplicité grâce à Lightning !</h2>
+                <p class="lightning-description">Avec Lightning, vous pouvez effectuer des transactions Bitcoin de manière rapide et pratique. Profitez d'une expérience fluide et sécurisée pour échanger vos Bitcoins en un éclair. Découvrez la puissance de Lightning pour des échanges instantanés et sans tracas !</p>
+                
+                <div class="buttons-container">
+                    <button id="buy-btn" class="action-btn">Acheter</button>
+                    <button id="sell-btn" class="action-btn">Vendre</button>
+                </div>
+            </div>
+            <div class="bitcoin-image">
+                <img src="img_circle1.625912c4.svg" alt="Bitcoin Lightning" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'achat -->
+    <div id="buy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Étape 1: Informations de base -->
+            <div id="buy-step1" class="step active">
+                <h3>Acheter Bitcoin</h3>
+                <form id="buy-form1">
+                    <div class="form-group">
+                        <label>Pays:</label>
+                        <input type="text" id="buy-country" placeholder="Saisissez votre pays" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Choisissez votre réseau:</label>
+                        <select id="buy-network" required>
+                            <option value="">Sélectionnez un réseau</option>
+                            <option value="MOOV">MOOV</option>
+                            <option value="MTN">MTN</option>
+                            <option value="CELTIIS">CELTIIS</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Prénom:</label>
+                        <input type="text" id="buy-firstname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nom:</label>
+                        <input type="text" id="buy-lastname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="buy-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Montant à payer en XOF:</label>
+                        <input type="number" id="buy-amount-xof" placeholder="Ex: 1000" min="100" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Montant à recevoir en sats:</label>
+                        <input type="text" id="buy-amount-sats" readonly>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-secondary" onclick="closeBuyModal()">Précédent</button>
+                        <button type="submit" class="btn-primary">Continuer</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Étape 2: Dépôt -->
+            <div id="buy-step2" class="step">
+                <h3>Effectuer le dépôt</h3>
+                <p>Effectuer le dépôt de l'argent que vous avez entré lors des renseignements (<span id="deposit-amount"></span> XOF) sur le Numéro ci-dessous et compléter le formulaire.</p>
+                
+                <div class="deposit-info">
+                    <p><strong>Nom:</strong> Fernand METCHIHOUNGBE</p>
+                    <p><strong>Numéro:</strong> <span id="deposit-number"></span></p>
+                </div>
+                
+                <form id="buy-form2">
+                    <div class="form-group">
+                        <label>Identifiant du dépôt:</label>
+                        <input type="text" id="deposit-id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Adresse Lightning qui va recevoir les sats:</label>
+                        <input type="text" id="lightning-address" placeholder="votre@adresse.lightning" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-secondary" onclick="showBuyStep1()">Précédent</button>
+                        <button type="submit" class="btn-primary">Confirmer</button>
+                    </div>
+                </form>
+                
+                <div id="buy-success" class="success-message" style="display: none;">
+                    <p>Veuillez patienter un instant...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de vente -->
+    <div id="sell-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Étape 1: Informations de base -->
+            <div id="sell-step1" class="step active">
+                <h3>Vendre Bitcoin</h3>
+                <form id="sell-form1">
+                    <div class="form-group">
+                        <label>Pays:</label>
+                        <input type="text" id="sell-country" placeholder="Saisissez votre pays" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Choisissez votre réseau:</label>
+                        <select id="sell-network" required>
+                            <option value="">Sélectionnez un réseau</option>
+                            <option value="MOOV">MOOV</option>
+                            <option value="MTN">MTN</option>
+                            <option value="CELTIIS">CELTIIS</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Prénom:</label>
+                        <input type="text" id="sell-firstname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nom:</label>
+                        <input type="text" id="sell-lastname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="sell-email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Montant en sats à vendre:</label>
+                        <input type="number" id="sell-amount-sats" placeholder="Ex: 10000" min="1000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Montant à recevoir en XOF:</label>
+                        <input type="text" id="sell-amount-xof" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Numéro qui va recevoir le dépôt après vente:</label>
+                        <input type="tel" id="sell-phone" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-secondary" onclick="closeSellModal()">Précédent</button>
+                        <button type="submit" class="btn-primary">Continuer</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Étape 2: Envoi des sats -->
+            <div id="sell-step2" class="step">
+                <h3>Envoyer vos sats</h3>
+                <p>Envoyez vos sats sur cette adresse pour recevoir votre argent en XOF:</p>
+                
+                <div class="deposit-info">
+                    <p><strong>Adresse Lightning:</strong> equalounce76@walletofsatoshi.com</p>
+                    <p><strong>Montant à envoyer:</strong> <span id="sell-sats-amount"></span> sats</p>
+                    <p><strong>Vous recevrez:</strong> <span id="sell-xof-amount"></span> XOF</p>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" class="btn-secondary" onclick="showSellStep1()">Précédent</button>
+                    <button type="button" class="btn-primary" onclick="showSellConfirm()">Continuer</button>
+                </div>
+            </div>
+
+            <!-- Étape 3: Confirmation -->
+            <div id="sell-step3" class="step">
+                <h3>Confirmation</h3>
+                <p>Vous êtes sur le point de valider votre transaction.</p>
+                
+                <div class="form-buttons">
+                    <button type="button" class="btn-secondary" onclick="showSellStep2()">Précédent</button>
+                    <button type="button" class="btn-primary" onclick="confirmSellTransaction()">Valider</button>
+                </div>
+                
+                <div id="sell-success" class="success-message" style="display: none;">
+                    <p>Merci pour la confiance de nous avoir choisis !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Footer Section -->
+    <entête>
+        <h2>Ensemble pour une autonomisation des jeunes & PME en Afrique avec Bitcoin</h2>
+    </entête>
+    <hr>
+    <main>
+        <section class="content">
+            <div class="flash-section">
+                <h2><span class="flash-icon">⚡</span> SatoshiHub</h2>
+                <p>Passionnés de Bitcoin et de sa technologie, nous travaillons à vous permettre d’accéder aux
+                    services du quotidien grâce au Bitcoin. Vous pouvez facilement acheter vos unités mobiles,
+                    forfaits et autres avec Bitcoin.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h3>Produit</h3>
+                    <ul>
+                        <li><a href="#bitpay">SatoshiHub</a></li>
+                        <li><a href="https://bitcoinflash.xyz/" target="_blank">SatoshiHubPayment</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="http://Wa.me//+22954006206" target="_blank">Contactez-nous</a></li>
+                        <li><a href="https://x.com/MMetchihoungbe" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/fernand.metchihoungbe" target="_blank">Facebook</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© SatoshiHub - 2025 - 2026. Tous droits réservés. <a href="#confidentialite">Confidentialité</a> <a
+                href="#conditions">Conditions d'utilisation</a></p>
+        <hr>
+        <p>Propulsé par <a href="https://bitcoinflash.xyz/" target="_blank">Flash</a></p>
+    </footer>
+    <script src="achat.js"></script>
+</body>
+</html>

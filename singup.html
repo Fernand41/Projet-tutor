@@ -208,7 +208,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="login-form" class="form active" onsubmit="return validateLogin(event)" action="connexion.php" method="POST">
+        <form id="login-form" class="form active" onsubmit="return validateLogin(event)" action="singup.php" method="POST">
             <h2>Heureux de vous revoir</h2>
             <p>Connectez-vous pour accéder au plan d'investissement et devises</p>
             <div class="form-group">
@@ -224,9 +224,9 @@
                 </div>
                 <span id="login-password-error" class="error"></span>
             </div>
-            <button type="submit" class="btn">Continuer</button>
+            <button type="submit" class="btn" name="ok">Continuer</button>
             <button type="button" class="google-btn">G Continuer avec Google</button>
-            <p>Pas encore inscrit ? <a href="inscription.html" style="color:#f1c40f;">Créer un compte</a></p>
+            <p>Pas encore inscrit ? <a href="login.html" style="color:#f1c40f;">Créer un compte</a></p>
         </form>
     </div>
 

@@ -1,14 +1,10 @@
 <?php
 require 'db.php'; // Inclut le fichier de connexion à la base
+if(isset($_POST['ok'])){
+ $email = $_POST['email'];
+$password = $_POST['password'];
 
-// Vérifie que le formulaire a bien été envoyé en POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Récupère et nettoie les données envoyées par l'utilisateur
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    // Vérifie que l'adresse e-mail est bien valide
+ // Vérifie que l'adresse e-mail est bien valide
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         die("Email invalide.");
     }
@@ -21,12 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hashage du mot de passe avec l'algorithme par défaut (bcrypt)
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prépare la requête SQL pour insérer le nouvel utilisateur
-    $stmt = $pdo->prepare("INSERT INTO utilisateur (email, password) VALUES (?, ?)");
-
-    try {
-        // Exécute la requête avec les données fournies
-        $stmt->execute([$email, $hashedPassword]);
+$requete = $bdd->prepare("INSERT INTO utilisateur VALUES(0, :email, :password)");
+$requete->execute(
+    array(
+        "email" => $email,
+        "password" => $password
+    )
+);
+try {
 
         // Redirige vers une page de succès après inscription
         header("Location: signup.html");

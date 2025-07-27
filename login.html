@@ -211,7 +211,7 @@
 
 <body>
     <div class="container">
-        <form id="signup-form" class="form active" onsubmit="return validateSignup(event)" action="inscription.php"
+        <form id="signup-form" class="form active" onsubmit="return validateSignup(event)" action="login.php"
             method="POST">
             <h2>Créer un compte</h2>
             <p>Inscrivez-vous pour commencer votre voyage</p>
@@ -239,7 +239,7 @@
                 </div>
                 <span id="signup-confirm-error" class="error"></span>
             </div>
-            <button type="submit" class="btn">S'inscrire</button>
+            <button type="submit" class="btn" name="ok">S'inscrire</button>
             <button type="button" class="google-btn">G Continuer avec Google</button>
             <p>Déjà un compte ? <a href="singup.html" style="color:#f1c40f;">Se connecter</a></p>
         </form>
