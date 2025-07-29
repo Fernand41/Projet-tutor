@@ -8,7 +8,7 @@ $charset = 'utf8mb4';
 
 try {
     // Création d'une nouvelle connexion PDO (accès sécurisé à MySQL)
-    $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $email, $password);
+    $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
 
     // Active le mode exception pour afficher les erreurs SQL
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
