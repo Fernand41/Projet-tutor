@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Formation Bitcoin</title>
+    <link rel="stylesheet" href="dashbord.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fab fa-bitcoin"></i> Bitcoin Dashboard</h2>
+            </div>
+            
+            <!-- Section Épargne -->
+            <div class="sidebar-section">
+                <h3><i class="fas fa-piggy-bank"></i> Épargne</h3>
+                <button class="btn-primary" id="btn-ajouter">
+                    <i class="fas fa-plus"></i> Ajouter
+                </button>
+            </div>
+            
+            <!-- Section Leçon -->
+            <div class="sidebar-section">
+                <h3><i class="fas fa-graduation-cap"></i> Leçon</h3>
+                <button class="btn-secondary" id="btn-dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+            </div>
+
+            <!-- Section Achat / Vente -->
+            <div class="sidebar-section">
+                <h3><i class="fas fa-exchange-alt"></i> Achat / Vente</h3>
+                <button class="btn-secondary" id="btn-achat">
+                    <i class="fas fa-shopping-cart"></i> Achat
+                </button>
+                <button class="btn-secondary" id="btn-vente" style="margin-top: 10px;">
+                    <i class="fas fa-tags"></i> Vente
+                </button>
+            </div>
+
+
+        </aside>
+
+        <!-- Contenu principal -->
+        <main class="main-content">
+            <!-- Vue Dashboard (par défaut) -->
+            <div id="dashboard-view" class="view active">
+                <div class="page-header">
+                    <h1><i class="fas fa-chart-line"></i> Dashboard de Formation</h1>
+                    <p>Suivi des étudiants et de leur progression</p>
+                </div>
+                
+                <!-- Liste des étudiants -->
+                <div class="students-section">
+                    <h2>Étudiants Inscrits</h2>
+                    <div id="students-list" class="students-grid">
+                        <!-- Les étudiants seront ajoutés dynamiquement -->
+                    </div>
+                </div>
+                
+                <!-- Modules de formation -->
+                <div class="modules-section">
+                    <h2>Modules de Formation</h2>
+                    <div class="modules-grid">
+                        <div class="module-card">
+                            <i class="fab fa-bitcoin module-icon"></i>
+                            <h3>Le Général sur Bitcoin</h3>
+                            <p>Introduction aux concepts fondamentaux de Bitcoin</p>
+                        </div>
+                        <div class="module-card">
+                            <i class="fas fa-cogs module-icon"></i>
+                            <h3>Le Fonctionnement de Bitcoin</h3>
+                            <p>Comprendre le mécanisme technique de Bitcoin</p>
+                        </div>
+                        <div class="module-card">
+                            <i class="fas fa-coins module-icon"></i>
+                            <h3>Comment Obtenir ses Premiers Bitcoin</h3>
+                            <p>Méthodes d'acquisition et d'échange</p>
+                        </div>
+                        <div class="module-card">
+                            <i class="fas fa-shield-alt module-icon"></i>
+                            <h3>Sécurité</h3>
+                            <p>Bonnes pratiques de sécurité et protection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue Ajouter Étudiant -->
+            <div id="add-student-view" class="view">
+                <div class="page-header">
+                    <h1><i class="fas fa-user-plus"></i> Ajouter un compte Epargne</h1>
+                    <p>"Inscription d'un épargnant au programme d'épargne"</p>
+                </div>
+                
+                <form id="student-form" class="student-form">
+                    <div class="form-group">
+                        <label for="nom">
+                            <i class="fas fa-user"></i> Nom *
+                        </label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prenom">
+                            <i class="fas fa-user"></i> Prénom *
+                        </label>
+                        <input type="text" id="prenom" name="prenom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email *
+                        </label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telephone">
+                            <i class="fas fa-phone"></i> Numéro de Téléphone *
+                        </label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="wallet">
+                            <i class="fas fa-wallet"></i> Wallet Lightning *
+                        </label>
+                        <select id="wallet" name="wallet" required>
+                            <option value="">Choisir un wallet...</option>
+                            <option value="wallet-of-satoshi">Wallet of Satoshi</option>
+                            <option value="blink">Blink</option>
+                            <option value="phoenix">Phoenix</option>
+                            <option value="breez">Breez Wallet</option>
+                            <option value="electrum">Electrum</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="plan-epargne">
+                            <i class="fas fa-piggy-bank"></i> Plan d'Épargne *
+                        </label>
+                        <select id="plan-epargne" name="plan-epargne" required>
+                            <option value="">Choisir un plan...</option>
+                            <option value="plan-1">Plan d'Épargne 1</option>
+                            <option value="plan-2">Plan d'Épargne 2</option>
+                            <option value="plan-3">Plan d'Épargne 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="btn-cancel">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-check"></i> Valider
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Vue Transactions Achat -->
+            <div id="achat-view" class="view">
+                <div class="page-header">
+                    <h1><i class="fas fa-shopping-cart"></i> Transactions d'Achat</h1>
+                    <p>Liste des demandes d'achat de Bitcoin</p>
+                </div>
+                
+                <div class="transactions-section">
+                    <div class="transactions-header">
+                        <h2>Demandes d'Achat Bitcoin</h2>
+                        <div class="stats">
+                            <span class="stat-badge">Total: <span id="achat-count">0</span></span>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="achat-table" class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Pays</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Email</th>
+                                    <th>Réseau</th>
+                                    <th>Montant XOF</th>
+                                    <th>Montant Sats</th>
+                                    <th>Adresse Lightning</th>
+                                    <th>ID Dépôt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Les données d'achat seront ajoutées dynamiquement -->
+                            </tbody>
+                        </table>
+                        <div id="achat-empty" class="empty-state" style="display: none;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Aucune transaction d'achat</h3>
+                            <p>Les transactions d'achat apparaîtront ici lorsque des utilisateurs rempliront le formulaire d'achat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue Transactions Vente -->
+            <div id="vente-view" class="view">
+                <div class="page-header">
+                    <h1><i class="fas fa-tags"></i> Transactions de Vente</h1>
+                    <p>Liste des demandes de vente de Bitcoin</p>
+                </div>
+                
+                <div class="transactions-section">
+                    <div class="transactions-header">
+                        <h2>Demandes de Vente Bitcoin</h2>
+                        <div class="stats">
+                            <span class="stat-badge">Total: <span id="vente-count">0</span></span>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="vente-table" class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Pays</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Email</th>
+                                    <th>Réseau</th>
+                                    <th>Montant Sats</th>
+                                    <th>Montant XOF</th>
+                                    <th>Numéro Réception</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Les données de vente seront ajoutées dynamiquement -->
+                            </tbody>
+                        </table>
+                        <div id="vente-empty" class="empty-state" style="display: none;">
+                            <i class="fas fa-tags"></i>
+                            <h3>Aucune transaction de vente</h3>
+                            <p>Les transactions de vente apparaîtront ici lorsque des utilisateurs rempliront le formulaire de vente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de progression -->
+    <div id="progress-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Progression de l'Étudiant</h3>
+                <button class="btn-close" id="btn-close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="progress-content">
+                    <!-- Contenu de progression sera ajouté dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast pour les notifications -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="dashbord.js"></script>
+</body>
+</html>

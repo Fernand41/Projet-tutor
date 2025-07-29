@@ -277,29 +277,12 @@ Maintenant que nous disposons d'un peu de contexte, examinons le fonctionnement 
   <p></p>
   <p></p>
 
-  <h3></h3>
-  <p></p>
-  <p></p>
-  <p></p>
-  <p></p>
-
-
-  <h3></h3>
-  <p></p>
-  <p></p>
-  <p></p>
-  <p></p>
-
-
-
-
-
-
-
 
 
     `,
     4: `
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/yAIyH1lIU-A" title="How to Secure Your Cryptocurrencies? 2025" frameborder="0" allowfullscreen></iframe>
+
         <h2 style="color:orange;">🧑‍💻 Partie 4 – Éviter les arnaques</h2>
         <ul>
             <li>Se méfier des promesses de gains rapides.</li>
