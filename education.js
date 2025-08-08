@@ -7,7 +7,7 @@ const contents = {
     1: `
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/bBC-nXj3Ng4" 
     title="Introduction au Bitcoin" frameborder="0" allowfullscreen></iframe>
-        <h2 style="color:orange;">📍 Partie 1 – Comprendre le Général sur Bitcoin</h2>
+        <h2 style="color:orange;">Partie 1 – Comprendre le Général sur Bitcoin</h2>
         <h3> La préhistoire de Bitcoin</h3>
         <p>Avant que le terme "bitcoin" ne devienne synonyme de monnaie numérique et de transformation financière, une série d'idées, d'innovations et de mouvements sociaux ont jeté les bases de sa création. Parmi ceux-ci, le mouvement cypherpunk se distingue comme un élément clé de la préhistoire du bitcoin.</p>
         <p></p>
@@ -51,7 +51,7 @@ bien qu'il ne soit pas exclusivement cypherpunk, ce texte reflète les sentiment
     2: `
     <iframe width="100%" height="315" src="https://www.youtube.com/embed/Lx9zgZCMqXE" 
     title="Fonctionnement du Bitcoin" frameborder="0" allowfullscreen></iframe>
-        <h2 style="color:orange;">🔐 Partie 2 – Fonctionnement du Bitcoin</h2>
+        <h2 style="color:orange;">Partie 2 – Fonctionnement du Bitcoin</h2>
         <h2>Lancement du Bitcoin</h2>
          <h3>Commençons par un peu d'histoire.</h3>
            <img src="https://planb.network/cdn/courses/btc101/assets/fr/39.webp" alt="Chat" style="width:100%; height:auto;">
@@ -184,7 +184,7 @@ Maintenant que nous disposons d'un peu de contexte, examinons le fonctionnement 
     `,
     3: `
      <iframe width="100%" height="315" src="https://www.youtube.com/embed/EFX92MkI52Y" title="Guide pratique Bitcoin débutants" frameborder="0" allowfullscreen></iframe>
-        <h2 style="color:orange;">🧠 Partie 3 – Obtenir des bitcoins en travaillant</h2>
+        <h2 style="color:orange;">Partie 3 – Obtenir des bitcoins en travaillant</h2>
        <h3>Une économie parallèle se développe</h3>
        <p>Le bitcoin peut être considéré comme l'outil permettant de créer une économie parallèle aux monnaies fiduciaires, car il est possible de vendre des biens ou des services et d'être payé en bitcoins. Les transactions peuvent être effectuées directement en bitcoins, sans passer par une plateforme d'échange, mais simplement en allant d'un portefeuille bitcoin à un autre.</p>
        <p>L'économie du Bitcoin existe et se développe dans certaines régions du monde, comme au Salvador, où le Bitcoin est devenu une monnaie légale en 2021. Malheureusement, en janvier 2025, l'assemblée a adopté une nouvelle loi qui a retiré au Bitcoin son titre de "monnaie légale", prétendument après avoir subi des pressions du Fonds monétaire international. Selon la nouvelle loi, les gens ne sont plus obligés d'accepter le Bitcoin dans leurs entreprises et ne peuvent plus payer leurs impôts avec. L'acceptation reste volontaire.</p>
@@ -283,7 +283,7 @@ Maintenant que nous disposons d'un peu de contexte, examinons le fonctionnement 
     4: `
       <iframe width="100%" height="315" src="https://www.youtube.com/embed/yAIyH1lIU-A" title="How to Secure Your Cryptocurrencies? 2025" frameborder="0" allowfullscreen></iframe>
 
-        <h2 style="color:orange;">🧑‍💻 Partie 4 – Éviter les arnaques</h2>
+        <h2 style="color:orange;">Partie 4 – Éviter les arnaques</h2>
         <ul>
             <li>Se méfier des promesses de gains rapides.</li>
             <li>Ne jamais partager ses infos via des liens inconnus (phishing).</li>
@@ -291,7 +291,7 @@ Maintenant que nous disposons d'un peu de contexte, examinons le fonctionnement 
             <li>Utiliser uniquement les plateformes connues : Binance, Bitnob, Kraken…</li>
         </ul>
         <div class="security-section">
-            <h5>🚨 Signaux d'alarme</h5>
+            <h5>Signaux d'alarme</h5>
             <ul class="security-tips">
                 <li><strong>Gains garantis :</strong> Aucun investissement ne garantit des profits</li>
                 <li><strong>Urgence artificielle :</strong> "Offre limitée dans le temps"</li>
@@ -308,7 +308,7 @@ function createLessonCompleteSection(moduleNum) {
     return `
         <div class="lesson-complete-section">
             <button class="complete-lesson-btn" onclick="completeLesson(${moduleNum})">
-                ✅ Leçon terminée
+              Leçon terminée
             </button>
             <div id="congrats-${moduleNum}" class="congratulations-message" style="display: none;">
                 <div class="congrats-icon">🎉</div>
@@ -399,9 +399,9 @@ function toggleEducation() {
 
     if (content.style.display === 'none') {
         content.style.display = 'block';
-        button.textContent = '📚 Masquer le programme';
+        button.textContent = 'Masquer le programme';
     } else {
         content.style.display = 'none';
-        button.textContent = '📚 Découvrir le programme';
+        button.textContent = 'Découvrir le programme';
     }
 }
