@@ -1,20 +1,14 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = " ";
+$password = "";
+$dbname = "bitcoin_education"; 
 
-
-try{
-$bd = new PDO("mysql:host=$servername;dbname=bitcoin_education", $username, $password);
-$bd->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-echo  "connexion réussi !";
+try {
+    $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "connexion réussie";
+} catch(PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
 }
-
-catch (PDOException $e){
-    echo "Error : ".$e->getMessage();
-
-}
-$nom="fernand";
-
-$bd->exec("INSERT INTO utilisateur VALUES (0, '$nom', 'marilucmetchihoungbe@gmail.com')");
 ?>
