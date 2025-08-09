@@ -17,17 +17,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
+        // Requête préparée sécurisée avec paramètres nommés
+        $req = $db->prepare("SELECT * FROM user WHERE email = :email");
+        $req->execute(['email' => $email]);
         
-        // 🔹 Requête préparée sécurisée
-        $req = $db->prepare("SELECT * FROM user WHERE email = '$email' AND password = '$password'");
-        $req->execute([$email, $password]);
         $user = $req->fetch();
 
-        // Redirection vers education.html
-        header("Location: education.html");
-        exit();
+        // Vérification du mot de passe avec password_verify()
+        if ($user && password_verify($password, $user['password'])) {
+            // Connexion réussie
+            $_SESSION['user'] = $user;
+            header("Location: education.html");
+            exit();
+        } else {
+            echo "<p style='color:red; text-align:center;'>Identifiants invalides</p>";
+        }
     } else {
-        echo "<p style='color:red; text-align:center;'>Identifiants invalides</p>";
+        echo "<p style='color:red; text-align:center;'>Veuillez remplir tous les champs</p>";
     }
 }
 
