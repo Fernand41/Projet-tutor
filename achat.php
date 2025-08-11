@@ -391,18 +391,43 @@
         showBuyStep2();
     }
 
-    function handleBuyStep2(e) {
-        
-        // Afficher le message de succès
-        document.getElementById('buy-form2').style.display = 'none';
-        document.getElementById('buy-success').style.display = 'block';
-        
-        // Simuler un délai de traitement
-        setTimeout(() => {
-            closeBuyModal();
-            alert('Votre transaction d\'achat a été enregistrée. Vous recevrez vos sats sous peu.');
-        }, 3000);
-    }
+   function handleBuyStep2(e) {
+    e.preventDefault();
+    
+    // Afficher le chargement
+    document.getElementById('buy-form2').style.display = 'none';
+    document.getElementById('buy-success').style.display = 'block';
+    
+    // Récupérer les données du formulaire
+    const formData = new FormData(document.getElementById('buy-form2'));
+    
+    // Envoyer les données via AJAX
+    fetch('traitement.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            setTimeout(() => {
+                closeBuyModal();
+                alert(data.message);
+                // Vous pouvez accéder aux données avec data.data
+                console.log('Données enregistrées:', data.data);
+            }, 2000);
+        } else {
+            document.getElementById('buy-form2').style.display = 'block';
+            document.getElementById('buy-success').style.display = 'none';
+            alert('Erreur: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        document.getElementById('buy-form2').style.display = 'block';
+        document.getElementById('buy-success').style.display = 'none';
+        alert('Une erreur réseau est survenue');
+    });
+}
 
     function resetBuyForm() {
         document.getElementById('buy-form1').reset();
@@ -455,18 +480,41 @@
     }
 
     function confirmSellTransaction() {
-        // Cacher les boutons et afficher le message de succès
-        const buttons = document.querySelector('#sell-step3 .form-buttons');
-        const successMsg = document.getElementById('sell-success');
-        
-        buttons.style.display = 'none';
-        successMsg.style.display = 'block';
-        
-        // Fermer le modal après un délai
-        setTimeout(() => {
-            closeSellModal();
-        }, 3000);
-    }
+    // Récupérer les données du formulaire
+    const formData = new FormData(document.getElementById('sell-form1'));
+    
+    // Afficher le chargement
+    const buttons = document.querySelector('#sell-step3 .form-buttons');
+    const successMsg = document.getElementById('sell-success');
+    buttons.style.display = 'none';
+    successMsg.style.display = 'block';
+    
+    // Envoyer les données via AJAX
+    fetch('traitement.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            setTimeout(() => {
+                closeSellModal();
+                alert(data.message);
+                console.log('Données enregistrées:', data.data);
+            }, 2000);
+        } else {
+            buttons.style.display = 'flex';
+            successMsg.style.display = 'none';
+            alert('Erreur: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        buttons.style.display = 'flex';
+        successMsg.style.display = 'none';
+        alert('Une erreur réseau est survenue');
+    });
+}
 
     function resetSellForm() {
         document.getElementById('sell-form1').reset();

@@ -1,6 +1,3 @@
-// ================================
-// Application principale pour le tableau de bord Bitcoin
-// ================================
 class BitcoinDashboard {
     constructor() {
         // Charger les étudiants depuis le localStorage
@@ -320,16 +317,16 @@ class BitcoinDashboard {
         emptyState.style.display = 'none';
         tbody.innerHTML = this.buyTransactions.map(tx => `
             <tr>
-                <td>${this.formatDate(tx.timestamp)}</td>
+                <td>${this.formatDate(tx.created_at)}</td>
                 <td>${tx.country}</td>
                 <td>${tx.lastname}</td>
                 <td>${tx.firstname}</td>
                 <td title="${tx.email}">${tx.email}</td>
                 <td><span class="network-badge">${tx.network}</span></td>
-                <td class="amount-cell">${this.formatNumber(tx.amountXOF)} XOF</td>
-                <td class="amount-cell">${this.formatNumber(tx.amountSats)} sats</td>
-                <td title="${tx.lightningAddress}">${tx.lightningAddress}</td>
-                <td><strong>${tx.depositId}</strong></td>
+                <td class="amount-cell">${this.formatNumber(tx.amount_xof)} XOF</td>
+                <td class="amount-cell">${this.formatNumber(tx.amount_sats)} sats</td>
+                <td title="${tx.lightning_address}">${tx.lightning_address}</td>
+                <td><strong>${tx.deposit_id}</strong></td>
             </tr>
         `).join('');
     }
@@ -350,42 +347,56 @@ class BitcoinDashboard {
         emptyState.style.display = 'none';
         tbody.innerHTML = this.sellTransactions.map(tx => `
             <tr>
-                <td>${this.formatDate(tx.timestamp)}</td>
+                <td>${this.formatDate(tx.created_at)}</td>
                 <td>${tx.country}</td>
                 <td>${tx.lastname}</td>
                 <td>${tx.firstname}</td>
                 <td title="${tx.email}">${tx.email}</td>
                 <td><span class="network-badge">${tx.network}</span></td>
-                <td class="amount-cell">${this.formatNumber(tx.amountSats)} sats</td>
-                <td class="amount-cell">${this.formatNumber(tx.amountXOF)} XOF</td>
+                <td class="amount-cell">${this.formatNumber(tx.amount_sats)} sats</td>
+                <td class="amount-cell">${this.formatNumber(tx.amount_xof)} XOF</td>
                 <td><strong>${tx.phone}</strong></td>
             </tr>
         `).join('');
     }
 
-
     // Polling pour les nouvelles transactions
     startTransactionPolling() {
         setInterval(() => {
-            const newBuyTransactions = this.loadBuyTransactions();
-            const newSellTransactions = this.loadSellTransactions();
-            
-            if (newBuyTransactions.length !== this.buyTransactions.length ||
-                newSellTransactions.length !== this.sellTransactions.length) {
-                
-                this.buyTransactions = newBuyTransactions;
-                this.sellTransactions = newSellTransactions;
-                this.renderTransactions();
-                
-                // Notification de nouvelles transactions
-                if (newBuyTransactions.length > this.buyTransactions.length) {
-                    this.showToast('Nouvelle transaction d\'achat reçue!', 'success');
-                }
-                if (newSellTransactions.length > this.sellTransactions.length) {
-                    this.showToast('Nouvelle transaction de vente reçue!', 'success');
-                }
-            }
-        }, 2000); // Vérifier toutes les 2 secondes
+            fetch('get_transactions.php?type=buy')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data.length !== this.buyTransactions.length) {
+                        this.buyTransactions = data.data;
+                        this.renderBuyTransactions();
+                        
+                        // Notification si nouvelle transaction
+                        if (data.data.length > this.buyTransactions.length) {
+                            this.showToast('Nouvelle transaction d\'achat reçue!', 'success');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des achats:', error);
+                });
+
+            fetch('get_transactions.php?type=sell')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.data.length !== this.sellTransactions.length) {
+                        this.sellTransactions = data.data;
+                        this.renderSellTransactions();
+                        
+                        // Notification si nouvelle transaction
+                        if (data.data.length > this.sellTransactions.length) {
+                            this.showToast('Nouvelle transaction de vente reçue!', 'success');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des ventes:', error);
+                });
+        }, 5000); // Vérifier toutes les 2 secondes
     }
 
     // ================================

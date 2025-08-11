@@ -8,6 +8,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <?php
+    // Connexion à la base de données
+    $db = new PDO("mysql:host=localhost;dbname=bitcoin_education;charset=utf8", "root", "");
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupérer les transactions d'achat
+    $buyQuery = $db->query("SELECT * FROM buy_transactions ORDER BY created_at DESC");
+    $buyTransactions = $buyQuery->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupérer les transactions de vente
+    $sellQuery = $db->query("SELECT * FROM sell_transactions ORDER BY created_at DESC");
+    $sellTransactions = $sellQuery->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+    
     <div class="container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -41,8 +55,6 @@
                     <i class="fas fa-tags"></i> Vente
                 </button>
             </div>
-
-
         </aside>
 
         <!-- Contenu principal -->
@@ -92,75 +104,7 @@
 
             <!-- Vue Ajouter Étudiant -->
             <div id="add-student-view" class="view">
-                <div class="page-header">
-                    <h1><i class="fas fa-user-plus"></i> Ajouter un compte Epargne</h1>
-                    <p>"Inscription d'un épargnant au programme d'épargne"</p>
-                </div>
-                
-                <form id="student-form" class="student-form">
-                    <div class="form-group">
-                        <label for="nom">
-                            <i class="fas fa-user"></i> Nom *
-                        </label>
-                        <input type="text" id="nom" name="nom" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="prenom">
-                            <i class="fas fa-user"></i> Prénom *
-                        </label>
-                        <input type="text" id="prenom" name="prenom" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">
-                            <i class="fas fa-envelope"></i> Email *
-                        </label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="telephone">
-                            <i class="fas fa-phone"></i> Numéro de Téléphone *
-                        </label>
-                        <input type="tel" id="telephone" name="telephone" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="wallet">
-                            <i class="fas fa-wallet"></i> Wallet Lightning *
-                        </label>
-                        <select id="wallet" name="wallet" required>
-                            <option value="">Choisir un wallet...</option>
-                            <option value="wallet-of-satoshi">Wallet of Satoshi</option>
-                            <option value="blink">Blink</option>
-                            <option value="phoenix">Phoenix</option>
-                            <option value="breez">Breez Wallet</option>
-                            <option value="electrum">Electrum</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="plan-epargne">
-                            <i class="fas fa-piggy-bank"></i> Plan d'Épargne *
-                        </label>
-                        <select id="plan-epargne" name="plan-epargne" required>
-                            <option value="">Choisir un plan...</option>
-                            <option value="plan-1">Plan d'Épargne 1</option>
-                            <option value="plan-2">Plan d'Épargne 2</option>
-                            <option value="plan-3">Plan d'Épargne 3</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="button" class="btn-cancel" id="btn-cancel">
-                            <i class="fas fa-times"></i> Annuler
-                        </button>
-                        <button type="submit" class="btn-submit">
-                            <i class="fas fa-check"></i> Valider
-                        </button>
-                    </div>
-                </form>
+                <!-- ... (contenu existant) ... -->
             </div>
 
             <!-- Vue Transactions Achat -->
@@ -174,7 +118,7 @@
                     <div class="transactions-header">
                         <h2>Demandes d'Achat Bitcoin</h2>
                         <div class="stats">
-                            <span class="stat-badge">Total: <span id="achat-count">0</span></span>
+                            <span class="stat-badge">Total: <span id="achat-count"><?= count($buyTransactions) ?></span></span>
                         </div>
                     </div>
                     <div class="table-container">
@@ -194,14 +138,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Les données d'achat seront ajoutées dynamiquement -->
+                                <?php if (empty($buyTransactions)): ?>
+                                    <tr>
+                                        <td colspan="10" class="empty-state">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <h3>Aucune transaction d'achat</h3>
+                                            <p>Les transactions d'achat apparaîtront ici lorsque des utilisateurs rempliront le formulaire d'achat.</p>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach($buyTransactions as $tx): ?>
+                                    <tr>
+                                        <td><?= date('d/m/Y H:i', strtotime($tx['created_at'])) ?></td>
+                                        <td><?= htmlspecialchars($tx['country']) ?></td>
+                                        <td><?= htmlspecialchars($tx['lastname']) ?></td>
+                                        <td><?= htmlspecialchars($tx['firstname']) ?></td>
+                                        <td><?= htmlspecialchars($tx['email']) ?></td>
+                                        <td><span class="network-badge"><?= htmlspecialchars($tx['network']) ?></span></td>
+                                        <td class="amount-cell"><?= number_format($tx['amount_xof'], 0, ',', ' ') ?> XOF</td>
+                                        <td class="amount-cell"><?= number_format($tx['amount_sats'], 0, ',', ' ') ?> sats</td>
+                                        <td title="<?= htmlspecialchars($tx['lightning_address']) ?>"><?= substr(htmlspecialchars($tx['lightning_address']), 0, 15) ?>...</td>
+                                        <td><strong><?= htmlspecialchars($tx['deposit_id']) ?></strong></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
-                        <div id="achat-empty" class="empty-state" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <h3>Aucune transaction d'achat</h3>
-                            <p>Les transactions d'achat apparaîtront ici lorsque des utilisateurs rempliront le formulaire d'achat.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -217,7 +179,7 @@
                     <div class="transactions-header">
                         <h2>Demandes de Vente Bitcoin</h2>
                         <div class="stats">
-                            <span class="stat-badge">Total: <span id="vente-count">0</span></span>
+                            <span class="stat-badge">Total: <span id="vente-count"><?= count($sellTransactions) ?></span></span>
                         </div>
                     </div>
                     <div class="table-container">
@@ -236,14 +198,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Les données de vente seront ajoutées dynamiquement -->
+                                <?php if (empty($sellTransactions)): ?>
+                                    <tr>
+                                        <td colspan="9" class="empty-state">
+                                            <i class="fas fa-tags"></i>
+                                            <h3>Aucune transaction de vente</h3>
+                                            <p>Les transactions de vente apparaîtront ici lorsque des utilisateurs rempliront le formulaire de vente.</p>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach($sellTransactions as $tx): ?>
+                                    <tr>
+                                        <td><?= date('d/m/Y H:i', strtotime($tx['created_at'])) ?></td>
+                                        <td><?= htmlspecialchars($tx['country']) ?></td>
+                                        <td><?= htmlspecialchars($tx['lastname']) ?></td>
+                                        <td><?= htmlspecialchars($tx['firstname']) ?></td>
+                                        <td><?= htmlspecialchars($tx['email']) ?></td>
+                                        <td><span class="network-badge"><?= htmlspecialchars($tx['network']) ?></span></td>
+                                        <td class="amount-cell"><?= number_format($tx['amount_sats'], 0, ',', ' ') ?> sats</td>
+                                        <td class="amount-cell"><?= number_format($tx['amount_xof'], 0, ',', ' ') ?> XOF</td>
+                                        <td><strong><?= htmlspecialchars($tx['phone']) ?></strong></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
-                        <div id="vente-empty" class="empty-state" style="display: none;">
-                            <i class="fas fa-tags"></i>
-                            <h3>Aucune transaction de vente</h3>
-                            <p>Les transactions de vente apparaîtront ici lorsque des utilisateurs rempliront le formulaire de vente.</p>
-                        </div>
                     </div>
                 </div>
             </div>
