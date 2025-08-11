@@ -88,7 +88,7 @@
                     
                     <div class="form-buttons">
                         <button type="button" class="btn-secondary" onclick="closeBuyModal()">Précédent</button>
-                        <button type="submit" class="btn-primary">Continuer</button>
+                        <button type="submit" class="btn-primary" >Continuer</button>
                     </div>
                 </form>
             </div>
@@ -125,7 +125,7 @@
                     
                     <div class="form-buttons">
                         <button type="button" class="btn-secondary" onclick="showBuyStep1()">Précédent</button>
-                        <button type="submit" class="btn-primary">Confirmer</button>
+                        <button type="submit" class="btn-primary" name="operation">Confirmer</button>
                     </div>
                 </form>
                 
@@ -179,7 +179,7 @@
                     
                     <div class="form-group">
                         <label>Montant en sats à vendre:</label>
-                        <input type="number" id="sell-amount-sats" name="amount_sats" placeholder="Ex: 10000" min="1000" required>
+                        <input type="number" id="sell-amount-sats" name="amount_sats" placeholder="Ex: 10000" min="" required>
                     </div>
                     
                     <div class="form-group">
@@ -194,7 +194,7 @@
                     
                     <div class="form-buttons">
                         <button type="button" class="btn-secondary" onclick="closeSellModal()">Précédent</button>
-                        <button type="submit" class="btn-primary">Continuer</button>
+                        <button type="submit" class="btn-primary" >Continuer</button>
                     </div>
                 </form>
             </div>
@@ -223,7 +223,7 @@
                 
                 <div class="form-buttons">
                     <button type="button" class="btn-secondary" onclick="showSellStep2()">Précédent</button>
-                    <button type="button" class="btn-primary" onclick="confirmSellTransaction()">Valider</button>
+                    <button type="button" class="btn-primary" onclick="confirmSellTransaction()" name="operation">Valider</button>
                 </div>
                 
                 <div id="sell-success" class="success-message" style="display: none;">
@@ -392,7 +392,6 @@
     }
 
     function handleBuyStep2(e) {
-        e.preventDefault();
         
         // Afficher le message de succès
         document.getElementById('buy-form2').style.display = 'none';

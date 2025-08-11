@@ -363,6 +363,7 @@ class BitcoinDashboard {
         `).join('');
     }
 
+
     // Polling pour les nouvelles transactions
     startTransactionPolling() {
         setInterval(() => {
@@ -559,12 +560,3 @@ class BitcoinDashboard {
         }, 4000);
     }
 }
-
-// ================================
-// Initialisation de l'application
-// ================================
-let dashboard;
-
-document.addEventListener('DOMContentLoaded', function() {
-    dashboard = new BitcoinDashboard();
-});

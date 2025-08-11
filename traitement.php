@@ -66,4 +66,84 @@ if (isset($_POST['ok'])) {
     }
 }
 
+// Traitement des transactions Bitcoin (achat/vente)
+if (isset($_POST["operation"])) {
+    $operation = $_POST["operation"]; // Récupération de l'opération
+
+    // ---- ACHAT ----
+    if ($operation === "achat") {
+        $country = $_POST['country'];
+        $network = $_POST['network'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $amount_xof = $_POST['amount_xof'];
+        $amount_sats = $_POST['amount_sats'];
+        $lightning_address = $_POST['lightning_address'];
+        $deposit_id = $_POST['deposit_id'];
+
+        try {
+            $requete = $db->prepare("INSERT INTO buy_transactions 
+                (country, network, firstname, lastname, email, amount_xof, amount_sats, lightning_address, deposit_id) 
+                VALUES 
+                (:country, :network, :firstname, :lastname, :email, :amount_xof, :amount_sats, :lightning_address, :deposit_id)");
+            $requete->execute([
+                "country"   => $country,
+                "network"   => $network,
+                "firstname" => $firstname,
+                "lastname"  => $lastname,
+                "email"     => $email,
+                "amount_xof"=> $amount_xof,
+                "amount_sats"=> $amount_sats,
+                "lightning_address" => $lightning_address,
+                "deposit_id"=> $deposit_id,
+            ]);
+            $_SESSION['success'] = "Achat réussi !";
+        } catch(PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de l'achat : " . $e->getMessage();
+            header("Location: achat.php");
+            exit();
+        }
+    }
+
+    // ---- VENTE ----
+    elseif ($operation === "vente") {
+        $country = $_POST['country'];
+        $network = $_POST['network'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $amount_sats = $_POST['amount_sats'];
+        $amount_xof = $_POST['amount_xof'];
+        $phone = $_POST['phone'];
+
+        try {
+            $requete = $db->prepare("INSERT INTO sell_transactions 
+                (country, network, firstname, lastname, email, amount_sats, amount_xof, phone) 
+                VALUES 
+                (:country, :network, :firstname, :lastname, :email, :amount_sats, :amount_xof, :phone)");
+            $requete->execute([
+                "country"   => $country,
+                "network"   => $network,
+                "firstname" => $firstname,
+                "lastname"  => $lastname,
+                "email"     => $email,
+                "amount_sats"=> $amount_sats,
+                "amount_xof"=> $amount_xof,
+                "phone"     => $phone,
+            ]);
+            $_SESSION['success'] = "Vente réussie !";
+        } catch(PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la vente : " . $e->getMessage();
+            header("Location: achat.html");
+            exit();
+        }
+    }
+
+    // Confirmation et redirection
+    header("Location: index.html");
+    exit();
+} else {
+    echo "Formulaire invalide.";
+}
 ?>
